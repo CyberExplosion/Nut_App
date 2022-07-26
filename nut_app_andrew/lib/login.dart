@@ -1,17 +1,82 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:animations/animations.dart';
 import 'color.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
+  final double _opacityLevel = 0;
+  late AnimationController _controllerFadeOut;
+  late AnimationController _controllerFadeIn;
+
+  late Animation<double> _animationIn;
+  late Animation<double> _animationOut;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controllerFadeOut =
+        AnimationController(vsync: this, duration: Duration(seconds: 5));
+    _controllerFadeIn =
+        AnimationController(vsync: this, duration: Duration(seconds: 3));
+
+    _controllerFadeOut.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controllerFadeIn.forward();
+      }
+    });
+
+    _animationIn = Tween(begin: 0.0, end: 1.0).animate(_controllerFadeIn);
+    _animationOut = Tween(begin: 5.0, end: 0.0).animate(_controllerFadeOut);
+
+    _play();
+  }
+
+  Future<void> _play() async {
+    try {
+      await _controllerFadeOut.forward().orCancel;
+      await _controllerFadeIn.forward().orCancel;
+    } on TickerCanceled {
+      //Handle if animation was canceled for whatever reason if you need it
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _controllerFadeOut.dispose();
+    _controllerFadeIn.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _controllerFadeOut.forward();
+    return Stack(
+      children: [
+        FadeTransition(
+          opacity: _animationOut,
+          child: const FrontLayer(),
+        ),
+        FadeTransition(
+          opacity: _animationIn,
+          child: BackLayer(),
+        ),
+      ],
+    );
+  }
+}
 
 class BackLayer extends StatelessWidget {
   BackLayer({Key? key}) : super(key: key);
-
-  final Widget svg_google = SvgPicture.asset(
-    '/btn_google.svg',
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +248,10 @@ class FrontLayer extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Nut',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: kLogoText),
                   ),
                 )
               ],

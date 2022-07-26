@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nut App',
       theme: _kNutTheme,
-      home: BackLayer(),
+      home: LoginPage(),
     );
   }
 }
