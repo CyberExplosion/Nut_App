@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'login.dart';
 import 'color.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nut App',
       theme: _kNutTheme,
-      home: const FrontLayer(),
+      home: BackLayer(),
     );
   }
 }
@@ -33,5 +34,8 @@ ThemeData _buildNutTheme() {
 }
 
 TextTheme _buildNutTextTheme(TextTheme base) {
-  return base.copyWith(titleLarge: base.titleLarge!.copyWith(color: kLogoText));
+  return base.copyWith(
+    titleLarge: base.titleLarge!.copyWith(color: kLogoText),
+    bodyMedium: GoogleFonts.roboto(),
+  );
 }
