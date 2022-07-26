@@ -16,101 +16,141 @@ class BackLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kLoginBackground,
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.only(top: 2),
-        child: Center(
-          child: Column(
-            children: [
-              Image.asset(
-                '/gym_weight.png',
-                width: 234,
-                height: 217,
-              ),
-              const SizedBox(
-                height: 86,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  'Login',
-                  style: Theme.of(context).textTheme.bodyMedium,
+          child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 172),
+          child: Center(
+            child: Column(
+              children: [
+                Image.asset(
+                  '/gym_weight.png',
+                  width: 234,
+                  height: 217,
                 ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text('Register',
-                    style: Theme.of(context).textTheme.bodyMedium),
-              ),
-              const SizedBox(
-                height: 64,
-              ),
-              Row(
-                children: [
-                  const Expanded(
-                    child: Divider(
-                      color: Colors.black,
-                      thickness: 1,
-                      indent: 11,
-                      endIndent: 8.5,
+                const SizedBox(
+                  height: 86,
+                ),
+                SizedBox(
+                  width: 228,
+                  height: 40,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Login',
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
-                  Text(
-                    'or login with',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                SizedBox(
+                  width: 228,
+                  height: 40,
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: kNutBackgroundBlue)),
+                    child: Text('Register',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: kNutBackgroundBlue)),
                   ),
-                  const Expanded(
-                    child: Divider(
-                      color: Colors.black,
-                      thickness: 1,
-                      indent: 8.5,
-                      endIndent: 11,
+                ),
+                const SizedBox(
+                  height: 55,
+                ),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Divider(
+                        color: Colors.black,
+                        thickness: 1,
+                        indent: 11,
+                        endIndent: 8.5,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 44,
-              ),
-              Column(
-                children: [
-                  TextButton(
+                    Text(
+                      'or login with',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    const Expanded(
+                      child: Divider(
+                        color: Colors.black,
+                        thickness: 1,
+                        indent: 8.5,
+                        endIndent: 11,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 44,
+                ),
+                SizedBox(
+                  width: 228,
+                  height: 40,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: kNutBackgroundBlue)),
                     onPressed: () {},
                     child: Row(
                       children: [
-                        svg_google,
-                        Text(
-                          'Google',
-                          style: Theme.of(context).textTheme.bodyMedium,
+                        Expanded(
+                          flex: 1,
+                          child: Image.network(
+                            'https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA',
+                            width: 32,
+                            height: 32,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            'Google',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
-              // const SizedBox(
-              //   height: 30,
-              // ),
-              TextButton(
-                onPressed: () {},
-                child: Row(
-                  children: [
-                    Image.asset(
-                      '/btn_facebook.png',
-                      width: 32,
-                      height: 32,
-                    ),
-                    Text(
-                      'Facebook',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 35,
+                ),
+                SizedBox(
+                  width: 228,
+                  height: 40,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: kNutBackgroundBlue)),
+                    onPressed: () {},
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Image.asset(
+                            '/btn_facebook.png',
+                            width: 32,
+                            height: 32,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            'Facebook',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       )),
@@ -143,11 +183,7 @@ class FrontLayer extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Nut',
-                    style: GoogleFonts.russoOne(
-                      textStyle: Theme.of(context).textTheme.titleLarge,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 144,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 )
               ],
