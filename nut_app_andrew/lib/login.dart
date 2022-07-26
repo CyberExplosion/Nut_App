@@ -90,7 +90,7 @@ class BackLayer extends StatelessWidget {
             child: Column(
               children: [
                 Image.asset(
-                  '/gym_weight.png',
+                  'assets/gym_weight.png',
                   width: 234,
                   height: 217,
                 ),
@@ -176,7 +176,10 @@ class BackLayer extends StatelessWidget {
                           flex: 2,
                           child: Text(
                             'Google',
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(color: Colors.black),
                           ),
                         ),
                       ],
@@ -198,7 +201,7 @@ class BackLayer extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: Image.asset(
-                            '/btn_facebook.png',
+                            'assets/btn_facebook.png',
                             width: 32,
                             height: 32,
                           ),
@@ -207,13 +210,19 @@ class BackLayer extends StatelessWidget {
                           flex: 2,
                           child: Text(
                             'Facebook',
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(color: Colors.black),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 115,
+                )
               ],
             ),
           ),
@@ -237,7 +246,7 @@ class FrontLayer extends StatelessWidget {
               children: [
                 Expanded(
                   child: Image.asset(
-                    '/newnut.png',
+                    'assets/newnut.png',
                     width: 563,
                     height: 317,
                   ),
