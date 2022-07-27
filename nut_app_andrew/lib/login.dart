@@ -1,8 +1,40 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animations/animations.dart';
 import 'color.dart';
+
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
+Future<UserCredential> signInWithGoogle() async {
+  //Trigger authentication
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  //Obtain the auth details
+  final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
+
+  //Create a new credentail after getting auth details
+  final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+
+  //Once signed in, return the UserCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
+}
+
+Future<UserCredential> signInWithFacebook() async {
+  //Trigger sign in work flow
+  final LoginResult loginResult = await FacebookAuth.instance.login();
+
+  //Create a credential from access token
+  final OAuthCredential facebookAuthCredentail =
+      FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+  ///return user credential
+  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredentail);
+}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
