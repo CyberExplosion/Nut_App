@@ -1,39 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/animation.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:animations/animations.dart';
 import 'color.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 Future<UserCredential> signInWithGoogle() async {
-  //Trigger authentication
-  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  //create new provider
+  GoogleAuthProvider googleProvider = GoogleAuthProvider();
 
-  //Obtain the auth details
-  final GoogleSignInAuthentication? googleAuth =
-      await googleUser?.authentication;
-
-  //Create a new credentail after getting auth details
-  final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-
-  //Once signed in, return the UserCredential
-  return await FirebaseAuth.instance.signInWithCredential(credential);
+  //Once signed in, return credential
+  return await FirebaseAuth.instance.signInWithPopup(googleProvider);
 }
 
 Future<UserCredential> signInWithFacebook() async {
-  //Trigger sign in work flow
-  final LoginResult loginResult = await FacebookAuth.instance.login();
-
-  //Create a credential from access token
-  final OAuthCredential facebookAuthCredentail =
-      FacebookAuthProvider.credential(loginResult.accessToken!.token);
+  //new provider
+  FacebookAuthProvider facebookProvider = FacebookAuthProvider();
 
   ///return user credential
-  return FirebaseAuth.instance.signInWithCredential(facebookAuthCredentail);
+  return await FirebaseAuth.instance.signInWithPopup(facebookProvider);
 }
 
 class LoginPage extends StatefulWidget {
@@ -147,7 +132,9 @@ class BackLayer extends StatelessWidget {
                   width: 228,
                   height: 40,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/registerPage');
+                    },
                     style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: kNutBackgroundBlue)),
                     child: Text('Register',
@@ -170,10 +157,11 @@ class BackLayer extends StatelessWidget {
                         endIndent: 8.5,
                       ),
                     ),
-                    Text(
-                      'or login with',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
+                    Text('or login with',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(color: Colors.black)),
                     const Expanded(
                       child: Divider(
                         color: Colors.black,
@@ -193,7 +181,11 @@ class BackLayer extends StatelessWidget {
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: kNutBackgroundBlue)),
-                    onPressed: () {},
+                    onPressed: () async {
+                      signInWithGoogle().then((value) {
+                        print(value.user.toString());
+                      });
+                    },
                     child: Row(
                       children: [
                         Expanded(
@@ -227,7 +219,9 @@ class BackLayer extends StatelessWidget {
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: kNutBackgroundBlue)),
-                    onPressed: () {},
+                    onPressed: () async {
+                      signInWithFacebook();
+                    },
                     child: Row(
                       children: [
                         Expanded(

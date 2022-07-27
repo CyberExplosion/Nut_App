@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:nut_app_andrew/register.dart';
 import 'firebase_options.dart';
 
 import 'package:flutter/material.dart';
@@ -21,7 +22,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nut App',
       theme: _kNutTheme,
-      home: LoginPage(),
+      routes: {
+        '/': (context) => const LoginPage(),
+        '/registerPage': (context) => const RegisterPage(),
+      },
     );
   }
 }
