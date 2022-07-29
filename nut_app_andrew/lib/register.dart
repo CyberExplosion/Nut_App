@@ -12,6 +12,7 @@ class RegisterPage extends StatefulWidget {
 class CirclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
+    // var paint = Paint()..color = const Color(kBubbleRegisterColor);
     var paint = Paint()..color = kNutBackgroundBlue;
     Offset center = Offset(size.width / 2, size.height / 2);
     canvas.drawCircle(center, 200, paint);
@@ -34,17 +35,16 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Stack(
         children: [
           Positioned(
-            // left: -19.86 / 100 * screenWidth,
-            // top: -18.03 / 100 * screenHeight,
-            left: 10,
+            top: -167,
+            left: -85,
             child: CustomPaint(
-              size: Size(456, 480),
+              size: const Size(456, 480),
               painter: CirclePainter(),
             ),
           ),
           Positioned(
-            left: -3.04 / 100 * screenWidth,
-            top: 4.32 / 100 * screenHeight,
+            top: 5,
+            left: -13,
             child: Image.asset(
               'assets/exercise_guy.png',
               width: 313,
@@ -55,41 +55,92 @@ class _RegisterPageState extends State<RegisterPage> {
             backgroundColor: Colors.transparent,
             appBar: AppBar(
                 leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () => Navigator.pop(context),
             )),
-            body: Column(
-              children: [
-                SizedBox(
-                  height: 50,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      label: Text('Email'),
-                      hintText: 'youremail@gmail.com',
-                      floatingLabelBehavior: FloatingLabelBehavior.always),
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      label: Text('Password'),
-                      hintText: 'Your Password',
-                      floatingLabelBehavior: FloatingLabelBehavior.always),
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      label: Text('Confirm Password'),
-                      hintText: 'Your Password',
-                      floatingLabelBehavior: FloatingLabelBehavior.always),
-                ),
-                ElevatedButton(onPressed: () {}, child: Text('Sign Up')),
-                SizedBox(
-                  height: 33,
-                ),
-                SignInFederation(),
-              ],
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 338,
+                  ),
+                  SizedBox(
+                    height: 20,
+                    width: 0.62 * screenWidth,
+                    child: Text(
+                      'Email',
+                      style: Theme.of(context).textTheme.labelSmall,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 0.65 * screenWidth,
+                    height: 60,
+                    child: const TextField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          hintText: 'youremail@gmail.com',
+                          floatingLabelBehavior: FloatingLabelBehavior.always),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                    width: 0.62 * screenWidth,
+                    child: Text(
+                      'Password',
+                      style: Theme.of(context).textTheme.labelSmall,
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 0.65 * screenWidth,
+                    height: 60,
+                    child: const TextField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          hintText: 'Your Password',
+                          floatingLabelBehavior: FloatingLabelBehavior.always),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                    width: 0.62 * screenWidth,
+                    child: Text(
+                      'Confirm Password',
+                      style: Theme.of(context).textTheme.labelSmall,
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 0.65 * screenWidth,
+                    height: 60,
+                    child: const TextField(
+                      decoration: InputDecoration(
+                          filled: true,
+                          hintText: 'Your Password',
+                          floatingLabelBehavior: FloatingLabelBehavior.always),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  SizedBox(
+                    width: 0.65 * screenWidth,
+                    height: 40,
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Sign Up',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 33,
+                  ),
+                  const SignInFederation(),
+                ],
+              ),
             ),
           ),
         ],

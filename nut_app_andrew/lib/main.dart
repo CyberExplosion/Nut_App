@@ -38,42 +38,52 @@ final ThemeData _kNutTheme = _buildNutTheme();
 ThemeData _buildNutTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-      textTheme: _buildNutTextTheme(base.textTheme),
-      scaffoldBackgroundColor: kLoginBackground,
-      appBarTheme: base.appBarTheme.copyWith(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          iconTheme: IconThemeData(color: kNutBackgroundBlue)),
-      colorScheme: base.colorScheme.copyWith(background: kNutBackgroundBlue),
-      elevatedButtonTheme: ElevatedButtonThemeData(
+    textTheme: _buildNutTextTheme(base.textTheme),
+    scaffoldBackgroundColor: kLoginBackground,
+    appBarTheme: base.appBarTheme.copyWith(
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: kNutBackgroundBlue)),
+    colorScheme: base.colorScheme.copyWith(background: kNutBackgroundBlue),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(kNutBackgroundBlue),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0)))),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(kNutBackgroundBlue),
+            backgroundColor: MaterialStateProperty.all<Color>(kLoginBackground),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0)))),
+                    borderRadius: BorderRadius.circular(18.0))))),
+    inputDecorationTheme: base.inputDecorationTheme.copyWith(
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: kNutBackgroundBlue,
+        ),
+        borderRadius: BorderRadius.circular(18.0),
       ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-          style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(kLoginBackground),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0))))));
+    ),
+  );
 }
 
 TextTheme _buildNutTextTheme(TextTheme base) {
   return base.copyWith(
-      titleLarge:
-          GoogleFonts.russoOne(fontWeight: FontWeight.w400, fontSize: 144),
-      bodyLarge: GoogleFonts.roboto(
-          fontWeight: FontWeight.w600, fontSize: 30, color: kLogoText),
-      bodyMedium: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 25),
-      bodySmall: GoogleFonts.roboto(fontWeight: FontWeight.w400, fontSize: 15)
-
-      // headline1: base.headline1!.copyWith(
-      // color: kLogoText, fontWeight: FontWeight.w600, fontSize: 30)
-      );
+    titleLarge:
+        GoogleFonts.russoOne(fontWeight: FontWeight.w400, fontSize: 144),
+    bodyLarge: GoogleFonts.roboto(
+        fontWeight: FontWeight.w600, fontSize: 30, color: kLogoText),
+    bodyMedium: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 25),
+    bodySmall: GoogleFonts.roboto(fontWeight: FontWeight.w400, fontSize: 15),
+    labelSmall: GoogleFonts.roboto(
+      fontWeight: FontWeight.w600,
+      fontSize: 13,
+    ),
+    // headline1: base.headline1!.copyWith(
+    // color: kLogoText, fontWeight: FontWeight.w600, fontSize: 30)
+  );
 }
 
 

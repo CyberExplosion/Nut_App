@@ -14,7 +14,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
-  final double _opacityLevel = 0;
   late AnimationController _controllerFadeOut;
   late AnimationController _controllerFadeIn;
 
