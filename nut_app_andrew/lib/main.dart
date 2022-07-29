@@ -39,7 +39,11 @@ ThemeData _buildNutTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
       textTheme: _buildNutTextTheme(base.textTheme),
-      scaffoldBackgroundColor: kNutBackgroundBlue,
+      scaffoldBackgroundColor: kLoginBackground,
+      appBarTheme: base.appBarTheme.copyWith(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          iconTheme: IconThemeData(color: kNutBackgroundBlue)),
       colorScheme: base.colorScheme.copyWith(background: kNutBackgroundBlue),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(

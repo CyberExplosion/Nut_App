@@ -132,6 +132,7 @@ class BackLayer extends StatelessWidget {
                 const SizedBox(
                   height: 55,
                 ),
+                const SignInFederation(),
                 const SizedBox(
                   height: 115,
                 )
