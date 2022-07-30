@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   late TapGestureRecognizer _registerLinkRecog;
+  final _emailController = TextEditingController();
+  final _passwdControlelr = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +132,17 @@ class _LoginPageState extends State<LoginPage> {
                         width: 0.65 * screenWidth,
                         height: 40,
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              try {
+                                final credentail = await FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                        email: _emailController.text,
+                                        password: _passwdControlelr.text);
+                              } on FirebaseAuthException catch (e) {
+                                if (e.code == 'user-not-found') {
+                                } else if (e.code == 'wrong-password') {}
+                              }
+                            },
                             child: Text('Login',
                                 style: Theme.of(context).textTheme.bodyLarge))),
                     const SizedBox(

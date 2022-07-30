@@ -181,6 +181,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 33,
                   ),
                   const SignInFederation(),
+                  const SizedBox(
+                    height: 110,
+                  )
                 ],
               ),
             ),
