@@ -6,14 +6,15 @@ import './widgets/sign_up_fed.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LandingPage extends StatefulWidget {
+  const LandingPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LandingPage> createState() => _LandingPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
+class _LandingPageState extends State<LandingPage>
+    with TickerProviderStateMixin {
   late AnimationController _controllerFadeOut;
   late AnimationController _controllerFadeIn;
 
@@ -102,7 +103,9 @@ class BackLayer extends StatelessWidget {
                   width: 228,
                   height: 40,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/loginPage');
+                    },
                     child: Text(
                       'Login',
                       style: Theme.of(context).textTheme.bodyLarge,

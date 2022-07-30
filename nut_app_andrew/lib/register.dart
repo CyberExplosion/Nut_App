@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nut_app_andrew/widgets/sign_up_fed.dart';
 import 'color.dart';
@@ -25,6 +26,10 @@ class CirclePainter extends CustomPainter {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _emailController = TextEditingController();
+  final _passwdController = TextEditingController();
+  final _secondPasswdController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -56,7 +61,11 @@ class _RegisterPageState extends State<RegisterPage> {
             appBar: AppBar(
                 leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                _emailController.clear();
+                _passwdController.clear();
+                Navigator.pop(context);
+              },
             )),
             body: SingleChildScrollView(
               child: Column(
@@ -77,8 +86,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     width: 0.65 * screenWidth,
                     height: 60,
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
                           filled: true,
                           hintText: 'youremail@gmail.com',
                           floatingLabelBehavior: FloatingLabelBehavior.always),
@@ -96,8 +106,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     width: 0.65 * screenWidth,
                     height: 60,
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      controller: _passwdController,
+                      decoration: const InputDecoration(
                           filled: true,
                           hintText: 'Your Password',
                           floatingLabelBehavior: FloatingLabelBehavior.always),
@@ -115,8 +129,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     width: 0.65 * screenWidth,
                     height: 60,
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      controller: _secondPasswdController,
+                      obscureText: true,
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      decoration: const InputDecoration(
                           filled: true,
                           hintText: 'Your Password',
                           floatingLabelBehavior: FloatingLabelBehavior.always),
@@ -129,7 +147,31 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: 0.65 * screenWidth,
                     height: 40,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          if (_emailController.text.isEmpty) {
+                            print("Enter a valid email");
+                          }
+                          if (_passwdController.text !=
+                              _secondPasswdController.text) {
+                            print('The password is not the same');
+                          } else {
+                            try {
+                              final credential = await FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                      email: _emailController.text,
+                                      password: _passwdController.text);
+                            } on FirebaseAuthException catch (e) {
+                              if (e.code == 'weak-password') {
+                                print("The password is too weak");
+                              } else if (e.code == 'email-already-in-use') {
+                                print(
+                                    "The account already exists for that email");
+                              }
+                            } catch (e) {
+                              print(e);
+                            }
+                          }
+                        },
                         child: Text(
                           'Sign Up',
                           style: Theme.of(context).textTheme.bodyLarge,

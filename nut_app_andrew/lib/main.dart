@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:nut_app_andrew/loginPage.dart';
 import 'package:nut_app_andrew/register.dart';
 import 'firebase_options.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'login.dart';
+import 'landing.dart';
 import 'color.dart';
 
 Future<void> main() async {
@@ -23,8 +24,9 @@ class MyApp extends StatelessWidget {
       title: 'Nut App',
       theme: _kNutTheme,
       routes: {
-        '/': (context) => const LoginPage(),
+        '/': (context) => const LandingPage(),
         '/registerPage': (context) => const RegisterPage(),
+        '/loginPage': (context) => const LoginPage(),
       },
     );
   }
@@ -38,35 +40,41 @@ final ThemeData _kNutTheme = _buildNutTheme();
 ThemeData _buildNutTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-    textTheme: _buildNutTextTheme(base.textTheme),
-    scaffoldBackgroundColor: kLoginBackground,
-    appBarTheme: base.appBarTheme.copyWith(
-        elevation: 0.0,
-        backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: kNutBackgroundBlue)),
-    colorScheme: base.colorScheme.copyWith(background: kNutBackgroundBlue),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(kNutBackgroundBlue),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0)))),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
+      textTheme: _buildNutTextTheme(base.textTheme),
+      scaffoldBackgroundColor: kLoginBackground,
+      appBarTheme: base.appBarTheme.copyWith(
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          iconTheme: IconThemeData(color: kNutBackgroundBlue)),
+      colorScheme: base.colorScheme.copyWith(background: kNutBackgroundBlue),
+      elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(kLoginBackground),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(kNutBackgroundBlue),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0))))),
-    inputDecorationTheme: base.inputDecorationTheme.copyWith(
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: kNutBackgroundBlue,
-        ),
-        borderRadius: BorderRadius.circular(18.0),
+                    borderRadius: BorderRadius.circular(18.0)))),
       ),
-    ),
-  );
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(kLoginBackground),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0))))),
+      inputDecorationTheme: base.inputDecorationTheme.copyWith(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: kNutBackgroundBlue,
+          ),
+          borderRadius: BorderRadius.circular(18.0),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0))))));
 }
 
 TextTheme _buildNutTextTheme(TextTheme base) {
@@ -81,8 +89,8 @@ TextTheme _buildNutTextTheme(TextTheme base) {
       fontWeight: FontWeight.w600,
       fontSize: 13,
     ),
-    // headline1: base.headline1!.copyWith(
-    // color: kLogoText, fontWeight: FontWeight.w600, fontSize: 30)
+    headlineSmall:
+        GoogleFonts.roboto(fontWeight: FontWeight.w700, fontSize: 14.5),
   );
 }
 
