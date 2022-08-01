@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:nut_app_andrew/getStartedPage/page1.dart';
 import 'package:nut_app_andrew/loginPage.dart';
 import 'package:nut_app_andrew/register.dart';
 import 'firebase_options.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'getStartedPage/page2.dart';
 import 'landing.dart';
 import 'color.dart';
 
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LandingPage(),
         '/registerPage': (context) => const RegisterPage(),
         '/loginPage': (context) => const LoginPage(),
+        '/getStartedPage/page1': (context) => const GetStarted1(),
+        '/getStartedPage/page2': (context) => const GetStarted2(),
       },
     );
   }
@@ -79,8 +83,8 @@ ThemeData _buildNutTheme() {
 
 TextTheme _buildNutTextTheme(TextTheme base) {
   return base.copyWith(
-    titleLarge:
-        GoogleFonts.russoOne(fontWeight: FontWeight.w400, fontSize: 144),
+    titleLarge: GoogleFonts.russoOne(
+        fontWeight: FontWeight.w400, fontSize: 144, color: kLogoText),
     bodyLarge: GoogleFonts.roboto(
         fontWeight: FontWeight.w600, fontSize: 30, color: kLogoText),
     bodyMedium: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 25),
@@ -89,8 +93,12 @@ TextTheme _buildNutTextTheme(TextTheme base) {
       fontWeight: FontWeight.w600,
       fontSize: 13,
     ),
+    labelMedium: GoogleFonts.roboto(
+        fontWeight: FontWeight.w600, fontSize: 30, color: kNutBackgroundBlue),
     headlineSmall:
         GoogleFonts.roboto(fontWeight: FontWeight.w700, fontSize: 14.5),
+    headlineMedium: GoogleFonts.roboto(
+        fontWeight: FontWeight.w700, fontSize: 20, color: kLogoText),
   );
 }
 

@@ -153,6 +153,7 @@ class FrontLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kNutBackgroundBlue,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 70),

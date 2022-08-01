@@ -30,7 +30,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late TapGestureRecognizer _registerLinkRecog;
   final _emailController = TextEditingController();
-  final _passwdControlelr = TextEditingController();
+  final _passwdController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,9 @@ class _LoginPageState extends State<LoginPage> {
     _registerLinkRecog = TapGestureRecognizer()
       ..onTap = () => Navigator.pushNamed(context, '/registerPage');
 
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Stack(
             children: [
               Positioned(
@@ -80,8 +80,9 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       width: 0.65 * screenWidth,
                       height: 60,
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextField(
+                        controller: _emailController,
+                        decoration: const InputDecoration(
                           filled: true,
                           hintText: 'youremail@gmail.com',
                         ),
@@ -98,8 +99,9 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       width: 0.65 * screenWidth,
                       height: 60,
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextField(
+                        controller: _passwdController,
+                        decoration: const InputDecoration(
                             filled: true, hintText: 'Your Password'),
                       ),
                     ),
@@ -133,14 +135,26 @@ class _LoginPageState extends State<LoginPage> {
                         height: 40,
                         child: ElevatedButton(
                             onPressed: () async {
-                              try {
-                                final credentail = await FirebaseAuth.instance
-                                    .signInWithEmailAndPassword(
-                                        email: _emailController.text,
-                                        password: _passwdControlelr.text);
-                              } on FirebaseAuthException catch (e) {
-                                if (e.code == 'user-not-found') {
-                                } else if (e.code == 'wrong-password') {}
+                              if (_emailController.text.isEmpty) {
+                                print("Please enter valid email");
+                              } else {
+                                try {
+                                  final credential = await FirebaseAuth.instance
+                                      .signInWithEmailAndPassword(
+                                          email: _emailController.text,
+                                          password: _passwdController.text);
+                                  if (credential.user != null) {
+                                    Navigator.pushNamed(
+                                        context, '/registerPage');
+                                  }
+                                } on FirebaseAuthException catch (e) {
+                                  if (e.code == 'user-not-found') {
+                                    print("There is no user with that email");
+                                  } else if (e.code == 'wrong-password') {
+                                    print("Wrong password for user");
+                                    //thisisabetch: password
+                                  }
+                                }
                               }
                             },
                             child: Text('Login',
