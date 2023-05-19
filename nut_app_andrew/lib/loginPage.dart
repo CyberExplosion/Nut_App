@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:nut_app_andrew/config/constants.dart' as constants;
 import 'color.dart';
 
 class CirclePainter extends CustomPainter {
@@ -40,9 +39,10 @@ class _LoginPageState extends State<LoginPage> {
     _registerLinkRecog = TapGestureRecognizer()
       ..onTap = () => Navigator.pushNamed(context, '/registerPage');
 
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      minimum: const EdgeInsets.all(constants.SAFEAREA_ALLINSETS),
+      child: Scaffold(
+        body: SingleChildScrollView(
           child: Stack(
             children: [
               Positioned(

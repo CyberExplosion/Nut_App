@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '274704029989',
     projectId: 'nut-app-c6d05',
     storageBucket: 'nut-app-c6d05.appspot.com',
+    androidClientId: '274704029989-gvh1rpvgpvroe6lchdjh284fb204qjti.apps.googleusercontent.com',
     iosClientId: '274704029989-qloi0v09dlif5508egs7t8v0j5an6opa.apps.googleusercontent.com',
     iosBundleId: 'com.example.nutAppAndrew',
   );
@@ -77,6 +78,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '274704029989',
     projectId: 'nut-app-c6d05',
     storageBucket: 'nut-app-c6d05.appspot.com',
+    androidClientId: '274704029989-gvh1rpvgpvroe6lchdjh284fb204qjti.apps.googleusercontent.com',
     iosClientId: '274704029989-qloi0v09dlif5508egs7t8v0j5an6opa.apps.googleusercontent.com',
     iosBundleId: 'com.example.nutAppAndrew',
   );

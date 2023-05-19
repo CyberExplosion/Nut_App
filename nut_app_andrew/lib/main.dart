@@ -49,7 +49,7 @@ ThemeData _buildNutTheme() {
       appBarTheme: base.appBarTheme.copyWith(
           elevation: 0.0,
           backgroundColor: Colors.transparent,
-          iconTheme: IconThemeData(color: kNutBackgroundBlue)),
+          iconTheme: const IconThemeData(color: kNutBackgroundBlue)),
       colorScheme: base.colorScheme.copyWith(background: kNutBackgroundBlue),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
@@ -68,7 +68,7 @@ ThemeData _buildNutTheme() {
                       borderRadius: BorderRadius.circular(18.0))))),
       inputDecorationTheme: base.inputDecorationTheme.copyWith(
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: kNutBackgroundBlue,
           ),
           borderRadius: BorderRadius.circular(18.0),
