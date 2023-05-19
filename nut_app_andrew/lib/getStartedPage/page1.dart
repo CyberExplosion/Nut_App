@@ -3,7 +3,7 @@ import 'package:nut_app_andrew/color.dart';
 import 'package:nut_app_andrew/config/constants.dart' as constants;
 
 class GetStarted1 extends StatelessWidget {
-  const GetStarted1({Key? key}) : super(key: key);
+  const GetStarted1({Key? key, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

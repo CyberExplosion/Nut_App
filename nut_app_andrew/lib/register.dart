@@ -172,7 +172,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               print(e);
                             }
                           }
-                          Navigator.pushNamed(context, '/getStartedPage/page1');
+                          // Navigator.pushNamed(context, '/getStartedPage/page1');
+                          if (context.mounted) {
+                            Navigator.pushNamed(context, '/getStartedPage');
+                          }
                         },
                         child: Text(
                           'Sign Up',

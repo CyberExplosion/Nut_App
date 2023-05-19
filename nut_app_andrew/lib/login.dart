@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
+    // final double screenHeight = MediaQuery.of(context).size.height;
 
     _registerLinkRecog = TapGestureRecognizer()
       ..onTap = () => Navigator.pushNamed(context, '/registerPage');
@@ -143,9 +143,10 @@ class _LoginPageState extends State<LoginPage> {
                                       .signInWithEmailAndPassword(
                                           email: _emailController.text,
                                           password: _passwdController.text);
-                                  if (credential.user != null) {
+                                  if (credential.user != null &&
+                                      context.mounted) {
                                     Navigator.pushNamed(
-                                        context, '/registerPage');
+                                        context, '/getStartedPage');
                                   }
                                 } on FirebaseAuthException catch (e) {
                                   if (e.code == 'user-not-found') {
