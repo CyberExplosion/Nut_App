@@ -17,15 +17,24 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,41 +52,11 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCJzih9nIS2gpWJLcMEWghu7V0sdORdAGg',
-    appId: '1:274704029989:web:3ce6c7adef19547d4362cc',
-    messagingSenderId: '274704029989',
-    projectId: 'nut-app-c6d05',
-    authDomain: 'nut-app-c6d05.firebaseapp.com',
-    storageBucket: 'nut-app-c6d05.appspot.com',
-    measurementId: 'G-XGXXGZQBND',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAr5InRHXTw6-LFvPuq_e1m3fpWKHCbO9Q',
-    appId: '1:274704029989:android:ec4527770623cbe44362cc',
-    messagingSenderId: '274704029989',
-    projectId: 'nut-app-c6d05',
-    storageBucket: 'nut-app-c6d05.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCO2xt5F_p9t94e6TybUBWw94PjqF01Jf4',
-    appId: '1:274704029989:ios:4d16d05912b15b184362cc',
-    messagingSenderId: '274704029989',
-    projectId: 'nut-app-c6d05',
-    storageBucket: 'nut-app-c6d05.appspot.com',
-    iosClientId: '274704029989-qloi0v09dlif5508egs7t8v0j5an6opa.apps.googleusercontent.com',
-    iosBundleId: 'com.example.nutAppAndrew',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCO2xt5F_p9t94e6TybUBWw94PjqF01Jf4',
-    appId: '1:274704029989:ios:4d16d05912b15b184362cc',
-    messagingSenderId: '274704029989',
-    projectId: 'nut-app-c6d05',
-    storageBucket: 'nut-app-c6d05.appspot.com',
-    iosClientId: '274704029989-qloi0v09dlif5508egs7t8v0j5an6opa.apps.googleusercontent.com',
-    iosBundleId: 'com.example.nutAppAndrew',
+    apiKey: 'AIzaSyAg93mOC55ko6BtmNbIs-ZxlE5ALrdgsLw',
+    appId: '1:396597344195:android:3a1608804e69fb22466f76',
+    messagingSenderId: '396597344195',
+    projectId: 'nutrition-app-a27fa',
+    storageBucket: 'nutrition-app-a27fa.appspot.com',
   );
 }

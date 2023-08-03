@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "274704029989",
-    "project_id": "nut-app-c6d05",
-    "storage_bucket": "nut-app-c6d05.appspot.com"
+    "project_number": "396597344195",
+    "project_id": "nutrition-app-a27fa",
+    "storage_bucket": "nutrition-app-a27fa.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:274704029989:android:ec4527770623cbe44362cc",
+        "mobilesdk_app_id": "1:396597344195:android:3a1608804e69fb22466f76",
         "android_client_info": {
           "package_name": "com.example.nut_app_andrew"
         }
       },
       "oauth_client": [
         {
-          "client_id": "274704029989-lr2ce91r0aknfmcgoefq1asg1kmg6c4a.apps.googleusercontent.com",
+          "client_id": "396597344195-c7g6mab20pdmpnmn199kqe4bii0iqmot.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAr5InRHXTw6-LFvPuq_e1m3fpWKHCbO9Q"
+          "current_key": "AIzaSyAg93mOC55ko6BtmNbIs-ZxlE5ALrdgsLw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "274704029989-lr2ce91r0aknfmcgoefq1asg1kmg6c4a.apps.googleusercontent.com",
+              "client_id": "396597344195-c7g6mab20pdmpnmn199kqe4bii0iqmot.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "274704029989-qloi0v09dlif5508egs7t8v0j5an6opa.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.nutAppAndrew"
-              }
             }
           ]
         }
