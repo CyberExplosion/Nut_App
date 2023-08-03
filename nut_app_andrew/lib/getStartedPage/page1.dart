@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:nut_app_andrew/color.dart';
+import 'package:nut_app_andrew/config/constants.dart' as constants;
 
 class GetStarted1 extends StatelessWidget {
-  const GetStarted1({Key? key}) : super(key: key);
+  const GetStarted1({Key? key, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kNutBackgroundBlue,
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      minimum: const EdgeInsets.all(constants.SAFEAREA_ALLINSETS),
+      child: Scaffold(
+        backgroundColor: kNutBackgroundBlue,
+        body: SingleChildScrollView(
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

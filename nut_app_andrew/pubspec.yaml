@@ -40,6 +40,7 @@ dependencies:
   firebase_auth: ^4.7.2
   google_sign_in: ^6.1.4
   flutter_facebook_auth: ^6.0.0
+  dots_indicator: ^3.0.0
 
 dev_dependencies:
   flutter_test:

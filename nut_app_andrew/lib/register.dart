@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nut_app_andrew/widgets/sign_up_fed.dart';
+import 'package:nut_app_andrew/config/constants.dart' as constants;
 import 'color.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -33,40 +34,41 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
 
-    return Stack(
-      children: [
-        Positioned(
-          top: -167,
-          left: -85,
-          child: CustomPaint(
-            size: const Size(456, 480),
-            painter: CirclePainter(),
+    return SafeArea(
+      minimum: const EdgeInsets.all(constants.SAFEAREA_ALLINSETS),
+      child: Stack(
+        children: [
+          Positioned(
+            top: -167,
+            left: -85,
+            child: CustomPaint(
+              size: const Size(456, 480),
+              painter: CirclePainter(),
+            ),
           ),
-        ),
-        Positioned(
-          top: 5,
-          left: -13,
-          child: Image.asset(
-            'assets/exercise_guy.png',
-            width: 313,
-            height: 273,
+          Positioned(
+            top: 5,
+            left: -13,
+            child: Image.asset(
+              'assets/exercise_guy.png',
+              width: 313,
+              height: 273,
+            ),
           ),
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: AppBar(
-              leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              _emailController.clear();
-              _passwdController.clear();
-              Navigator.pop(context);
-            },
-          )),
-          body: SafeArea(
-            child: SingleChildScrollView(
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+                leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                _emailController.clear();
+                _passwdController.clear();
+                Navigator.pop(context);
+              },
+            )),
+            body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -170,7 +172,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               print(e);
                             }
                           }
-                          Navigator.pushNamed(context, '/getStartedPage/page1');
+                          // Navigator.pushNamed(context, '/getStartedPage/page1');
+                          if (context.mounted) {
+                            Navigator.pushNamed(context, '/getStartedPage');
+                          }
                         },
                         child: Text(
                           'Sign Up',
@@ -188,9 +193,9 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           ),
-        ),
-      ],
-      //),
+        ],
+        //),
+      ),
     );
   }
 }

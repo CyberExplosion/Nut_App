@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'color.dart';
 import './widgets/sign_up_fed.dart';
-
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import './config/constants.dart' as constants;
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -23,12 +20,12 @@ class _LandingPageState extends State<LandingPage>
 
   @override
   void initState() {
-    // TODO: implement initState
+    ///// TODO: implement initState
     super.initState();
     _controllerFadeOut =
-        AnimationController(vsync: this, duration: Duration(seconds: 5));
+        AnimationController(vsync: this, duration: const Duration(seconds: 5));
     _controllerFadeIn =
-        AnimationController(vsync: this, duration: Duration(seconds: 3));
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
 
     _controllerFadeOut.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -53,7 +50,7 @@ class _LandingPageState extends State<LandingPage>
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    ///// TODO: implement dispose
     _controllerFadeOut.dispose();
     _controllerFadeIn.dispose();
     super.dispose();
@@ -70,7 +67,7 @@ class _LandingPageState extends State<LandingPage>
         ),
         FadeTransition(
           opacity: _animationIn,
-          child: BackLayer(),
+          child: const BackLayer(),
         ),
       ],
     );
@@ -78,71 +75,73 @@ class _LandingPageState extends State<LandingPage>
 }
 
 class BackLayer extends StatelessWidget {
-  BackLayer({Key? key}) : super(key: key);
+  const BackLayer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kLoginBackground,
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 172),
-          child: Center(
-            child: Column(
-              children: [
-                Image.asset(
-                  'assets/gym_weight.png',
-                  width: 234,
-                  height: 217,
-                ),
-                const SizedBox(
-                  height: 86,
-                ),
-                SizedBox(
-                  width: 228,
-                  height: 40,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/loginPage');
-                    },
-                    child: Text(
-                      'Login',
-                      style: Theme.of(context).textTheme.bodyLarge,
+    return SafeArea(
+      minimum: const EdgeInsets.all(constants.SAFEAREA_ALLINSETS),
+      child: Scaffold(
+        backgroundColor: kLoginBackground,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 172),
+            child: Center(
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/gym_weight.png',
+                    width: 234,
+                    height: 217,
+                  ),
+                  const SizedBox(
+                    height: 86,
+                  ),
+                  SizedBox(
+                    width: 228,
+                    height: 40,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/loginPage');
+                      },
+                      child: Text(
+                        'Login',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                SizedBox(
-                  width: 228,
-                  height: 40,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/registerPage');
-                    },
-                    style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: kNutBackgroundBlue)),
-                    child: Text('Register',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(color: kNutBackgroundBlue)),
+                  const SizedBox(
+                    height: 40,
                   ),
-                ),
-                const SizedBox(
-                  height: 55,
-                ),
-                const SignInFederation(),
-                const SizedBox(
-                  height: 115,
-                )
-              ],
+                  SizedBox(
+                    width: 228,
+                    height: 40,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/registerPage');
+                      },
+                      style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: kNutBackgroundBlue)),
+                      child: Text('Register',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(color: kNutBackgroundBlue)),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 55,
+                  ),
+                  const SignInFederation(),
+                  const SizedBox(
+                    height: 115,
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      )),
+      ),
     );
   }
 }

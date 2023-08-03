@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:nut_app_andrew/config/constants.dart' as constants;
 import 'color.dart';
 
 class CirclePainter extends CustomPainter {
@@ -35,14 +34,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
+    // final double screenHeight = MediaQuery.of(context).size.height;
 
     _registerLinkRecog = TapGestureRecognizer()
       ..onTap = () => Navigator.pushNamed(context, '/registerPage');
 
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      minimum: const EdgeInsets.all(constants.SAFEAREA_ALLINSETS),
+      child: Scaffold(
+        body: SingleChildScrollView(
           child: Stack(
             children: [
               Positioned(
@@ -143,9 +143,10 @@ class _LoginPageState extends State<LoginPage> {
                                       .signInWithEmailAndPassword(
                                           email: _emailController.text,
                                           password: _passwdController.text);
-                                  if (credential.user != null) {
+                                  if (credential.user != null &&
+                                      context.mounted) {
                                     Navigator.pushNamed(
-                                        context, '/registerPage');
+                                        context, '/getStartedPage');
                                   }
                                 } on FirebaseAuthException catch (e) {
                                   if (e.code == 'user-not-found') {
