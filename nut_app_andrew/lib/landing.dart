@@ -80,7 +80,7 @@ class BackLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: const EdgeInsets.all(constants.SAFEAREA_ALLINSETS),
+      minimum: const EdgeInsets.only(top: constants.SAFEAREA_ALLINSETS),
       child: Scaffold(
         backgroundColor: kLoginBackground,
         body: SingleChildScrollView(
@@ -132,7 +132,7 @@ class BackLayer extends StatelessWidget {
                   const SizedBox(
                     height: 55,
                   ),
-                  const SignInFederation(),
+                  // const SignInFederation(),  //! Add back later
                   const SizedBox(
                     height: 115,
                   )

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:nut_app_andrew/getStarted.dart';
 import 'firebase_options.dart';
@@ -14,6 +15,8 @@ import 'color.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseAuth.instance
+      .useAuthEmulator("localhost", 9099); //! For demoing only
   runApp(const MyApp());
 }
 
