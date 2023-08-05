@@ -56,8 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
             hasScrollBody: false,
             child: Column(
               children: [
-                SizedBox(
-                  height: 320,
+                Flexible(
                   child: Stack(
                     //Stack need to be wrap in a container and the container needs to have define height
                     clipBehavior: Clip.antiAlias,

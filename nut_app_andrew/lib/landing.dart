@@ -83,62 +83,55 @@ class BackLayer extends StatelessWidget {
       minimum: const EdgeInsets.only(top: constants.SAFEAREA_ALLINSETS),
       child: Scaffold(
         backgroundColor: kLoginBackground,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 172),
-            child: Center(
-              child: Column(
-                children: [
-                  Image.asset(
-                    'assets/gym_weight.png',
-                    width: 234,
-                    height: 217,
-                  ),
-                  const SizedBox(
-                    height: 86,
-                  ),
-                  SizedBox(
-                    width: 228,
-                    height: 40,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/loginPage');
-                      },
-                      child: Text(
-                        'Login',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  SizedBox(
-                    width: 228,
-                    height: 40,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/registerPage');
-                      },
-                      style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: kNutBackgroundBlue)),
-                      child: Text('Register',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(color: kNutBackgroundBlue)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 55,
-                  ),
-                  // const SignInFederation(),  //! Add back later
-                  const SizedBox(
-                    height: 115,
-                  )
-                ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/gym_weight.png',
+                width: 234,
+                height: 217,
               ),
-            ),
+              const SizedBox(
+                height: 86,
+              ),
+              SizedBox(
+                width: 228,
+                height: 40,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/loginPage');
+                  },
+                  child: Text(
+                    'Login',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              SizedBox(
+                width: 228,
+                height: 40,
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/registerPage');
+                  },
+                  style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: kNutBackgroundBlue)),
+                  child: Text('Register',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: kNutBackgroundBlue)),
+                ),
+              ),
+              const SizedBox(
+                height: 55,
+              ),
+              // const SignInFederation(), //! Add back later
+            ],
           ),
         ),
       ),
