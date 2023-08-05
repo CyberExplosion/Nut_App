@@ -49,39 +49,45 @@ class _RegisterPageState extends State<RegisterPage> {
             Navigator.pop(context);
           },
         )),
-        body: Container(
-          alignment: Alignment.center,
-          child: Stack(
-            children: [
-              Positioned(
-                top: -167,
-                left: -85,
-                child: CustomPaint(
-                  size: const Size(456, 480),
-                  painter: CirclePainter(),
-                ),
-              ),
-              Positioned(
-                top: 5,
-                left: -13,
-                child: Image.asset(
-                  'assets/exercise_guy.png',
-                  width: 313,
-                  height: 273,
-                ),
-              ),
-              Positioned(
-                top: 100,
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+        // Use slivers for easy managing of flexible inside scrolling
+        // https://stackoverflow.com/questions/56326005/how-to-use-expanded-in-singlechildscrollview
+        body: CustomScrollView(slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 320,
+                  child: Stack(
+                    //Stack need to be wrap in a container and the container needs to have define height
+                    clipBehavior: Clip.antiAlias,
                     children: [
-                      Text('PLES WORK'),
-                      const SizedBox(
-                        height: 338,
+                      Positioned(
+                        top: -167,
+                        left: -85,
+                        child: CustomPaint(
+                          size: const Size(456, 480),
+                          painter: CirclePainter(),
+                        ),
                       ),
+                      Positioned(
+                        top: 5,
+                        left: -13,
+                        child: Image.asset(
+                          'assets/exercise_guy.png',
+                          width: 313,
+                          height: 273,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Flexible(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
                       SizedBox(
-                        height: 20,
+                        height: 0,
                         width: 0.62 * screenWidth,
                         child: Text(
                           'Email',
@@ -149,8 +155,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   FloatingLabelBehavior.always),
                         ),
                       ),
-                      const SizedBox(
-                        height: 50,
+                      Flexible(
+                        child: Container(),
                       ),
                       SizedBox(
                         width: 0.65 * screenWidth,
@@ -192,20 +198,15 @@ class _RegisterPageState extends State<RegisterPage> {
                               style: Theme.of(context).textTheme.bodyLarge,
                             )),
                       ),
-                      const SizedBox(
-                        height: 33,
-                      ),
                       // const SignInFederation(),  //! Add back later
-                      const SizedBox(
-                        height: 110,
-                      ),
+                      Flexible(child: Container())
                     ],
                   ),
-                ),
-              ),
-            ],
-          ),
-        ),
+                )
+              ],
+            ),
+          )
+        ]),
       ),
     );
   }
