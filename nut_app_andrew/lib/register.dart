@@ -15,7 +15,7 @@ class CirclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // var paint = Paint()..color = const Color(kBubbleRegisterColor);
-    var paint = Paint()..color = kNutBackgroundBlue;
+    var paint = Paint()..color = kNutBackgroundBlue.withAlpha(40);
     Offset center = Offset(size.width / 2, size.height / 2);
     canvas.drawCircle(center, 200, paint);
   }
@@ -41,13 +41,19 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-            leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            _emailController.clear();
-            _passwdController.clear();
-            Navigator.pop(context);
-          },
+            leading: SizedBox(
+          child: IconButton(
+            iconSize: 40,
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              weight: 400,
+            ),
+            onPressed: () {
+              _emailController.clear();
+              _passwdController.clear();
+              Navigator.pop(context);
+            },
+          ),
         )),
         // Use slivers for easy managing of flexible inside scrolling
         // https://stackoverflow.com/questions/56326005/how-to-use-expanded-in-singlechildscrollview
@@ -56,7 +62,8 @@ class _RegisterPageState extends State<RegisterPage> {
             hasScrollBody: false,
             child: Column(
               children: [
-                Flexible(
+                SizedBox(
+                  height: 300,
                   child: Stack(
                     //Stack need to be wrap in a container and the container needs to have define height
                     clipBehavior: Clip.antiAlias,
@@ -82,124 +89,135 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Flexible(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 0,
-                        width: 0.62 * screenWidth,
-                        child: Text(
-                          'Email',
-                          style: Theme.of(context).textTheme.labelSmall,
-                          textAlign: TextAlign.start,
+                  child: SizedBox(
+                    width: 0.65 * screenWidth,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              child: Text(
+                                'Email',
+                                style: Theme.of(context).textTheme.labelSmall,
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            SizedBox(
+                              child: TextField(
+                                controller: _emailController,
+                                decoration: const InputDecoration(
+                                    filled: true,
+                                    hintText: 'youremail@gmail.com',
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.always),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        width: 0.65 * screenWidth,
-                        height: 60,
-                        child: TextField(
-                          controller: _emailController,
-                          decoration: const InputDecoration(
-                              filled: true,
-                              hintText: 'youremail@gmail.com',
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              child: Text(
+                                'Password',
+                                style: Theme.of(context).textTheme.labelSmall,
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            SizedBox(
+                              child: TextField(
+                                obscureText: true,
+                                enableSuggestions: false,
+                                autocorrect: false,
+                                controller: _passwdController,
+                                decoration: const InputDecoration(
+                                    filled: true,
+                                    hintText: 'Your Password',
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.always),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                        width: 0.62 * screenWidth,
-                        child: Text(
-                          'Password',
-                          style: Theme.of(context).textTheme.labelSmall,
-                          textAlign: TextAlign.left,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              child: Text(
+                                'Confirm Password',
+                                style: Theme.of(context).textTheme.labelSmall,
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            SizedBox(
+                              child: TextField(
+                                controller: _secondPasswdController,
+                                obscureText: true,
+                                enableSuggestions: false,
+                                autocorrect: false,
+                                decoration: const InputDecoration(
+                                    filled: true,
+                                    hintText: 'Your Password',
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.always),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        width: 0.65 * screenWidth,
-                        height: 60,
-                        child: TextField(
-                          obscureText: true,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          controller: _passwdController,
-                          decoration: const InputDecoration(
-                              filled: true,
-                              hintText: 'Your Password',
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                        width: 0.62 * screenWidth,
-                        child: Text(
-                          'Confirm Password',
-                          style: Theme.of(context).textTheme.labelSmall,
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 0.65 * screenWidth,
-                        height: 60,
-                        child: TextField(
-                          controller: _secondPasswdController,
-                          obscureText: true,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          decoration: const InputDecoration(
-                              filled: true,
-                              hintText: 'Your Password',
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always),
-                        ),
-                      ),
-                      Flexible(
-                        child: Container(),
-                      ),
-                      SizedBox(
-                        width: 0.65 * screenWidth,
-                        height: 40,
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              if (_emailController.text.isEmpty) {
-                                print("Enter a valid email");
-                              }
-                              if (_passwdController.text !=
-                                  _secondPasswdController.text) {
-                                print('The password is not the same');
-                              } else {
-                                try {
-                                  await FirebaseAuth.instance
-                                      .createUserWithEmailAndPassword(
-                                          email: _emailController.text,
-                                          password: _passwdController.text);
-                                } on FirebaseAuthException catch (e) {
-                                  if (e.code == 'weak-password') {
-                                    print("The password is too weak");
-                                  } else if (e.code == 'email-already-in-use') {
-                                    print(
-                                        "The account already exists for that email");
-                                  } else if (e.code == 'invalid-email') {
-                                    print('The email is already been used');
+                        // Flexible(
+                        //   flex: 3,
+                        //   child: Container(),
+                        // ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50, bottom: 8),
+                          child: SizedBox(
+                            width: 0.65 * screenWidth,
+                            height: 40,
+                            child: ElevatedButton(
+                                onPressed: () async {
+                                  if (_emailController.text.isEmpty) {
+                                    print("Enter a valid email");
                                   }
-                                } catch (e) {
-                                  print(e);
-                                }
-                              }
-                              // Navigator.pushNamed(context, '/getStartedPage/page1');
-                              if (context.mounted) {
-                                Navigator.pushNamed(context, '/getStartedPage');
-                              }
-                            },
-                            child: Text(
-                              'Sign Up',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            )),
-                      ),
-                      // const SignInFederation(),  //! Add back later
-                      Flexible(child: Container())
-                    ],
+                                  if (_passwdController.text !=
+                                      _secondPasswdController.text) {
+                                    print('The password is not the same');
+                                  } else {
+                                    try {
+                                      await FirebaseAuth.instance
+                                          .createUserWithEmailAndPassword(
+                                              email: _emailController.text,
+                                              password: _passwdController.text);
+                                    } on FirebaseAuthException catch (e) {
+                                      if (e.code == 'weak-password') {
+                                        print("The password is too weak");
+                                      } else if (e.code ==
+                                          'email-already-in-use') {
+                                        print(
+                                            "The account already exists for that email");
+                                      } else if (e.code == 'invalid-email') {
+                                        print('The email is already been used');
+                                      }
+                                    } catch (e) {
+                                      print(e);
+                                    }
+                                  }
+                                  // Navigator.pushNamed(context, '/getStartedPage/page1');
+                                  if (context.mounted) {
+                                    Navigator.pushNamed(
+                                        context, '/getStartedPage');
+                                  }
+                                },
+                                child: Text(
+                                  'Sign Up',
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                )),
+                          ),
+                        ),
+                        // const SignInFederation(),  //! Add back later
+                      ],
+                    ),
                   ),
                 )
               ],
