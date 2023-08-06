@@ -140,8 +140,23 @@ class _LoginPageState extends State<LoginPage> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     TextButton(
-                                      onPressed:
-                                          () {}, // Fix forgot password problem
+                                      onPressed: () async {
+                                        print(
+                                            'The user trying to reset password is: ${_emailController.text}');
+                                        if (_emailController.text.isNotEmpty) {
+                                          try {
+                                            await FirebaseAuth.instance
+                                                .sendPasswordResetEmail(
+                                                    email:
+                                                        _emailController.text);
+                                          } on FirebaseAuthException catch (e) {
+                                            print(
+                                                "The error is:\n ${e.message}");
+                                          }
+                                        } else {
+                                          print("There is no email in the box");
+                                        }
+                                      }, // Fix forgot password problem
                                       child: Text(
                                         'Forgot password',
                                         textAlign: TextAlign.right,
@@ -157,57 +172,52 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 23),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: SizedBox(
-                                        height: 40,
-                                        child: ElevatedButton(
-                                            onPressed: () async {
-                                              if (_emailController
-                                                  .text.isEmpty) {
-                                                print(
-                                                    "Please enter valid email");
-                                              } else {
-                                                try {
-                                                  final credential = await FirebaseAuth
-                                                      .instance
-                                                      .signInWithEmailAndPassword(
-                                                          email:
-                                                              _emailController
-                                                                  .text,
-                                                          password:
-                                                              _passwdController
-                                                                  .text);
-                                                  if (credential.user != null &&
-                                                      context.mounted) {
-                                                    Navigator.pushNamed(context,
-                                                        '/getStartedPage');
-                                                  }
-                                                } on FirebaseAuthException catch (e) {
-                                                  if (e.code ==
-                                                      'user-not-found') {
-                                                    print(
-                                                        "There is no user with that email");
-                                                  } else if (e.code ==
-                                                      'wrong-password') {
-                                                    print(
-                                                        "Wrong password for user");
-                                                    //thisisabetch: password
-                                                  }
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: SizedBox(
+                                      height: 40,
+                                      child: ElevatedButton(
+                                          onPressed: () async {
+                                            if (_emailController.text.isEmpty) {
+                                              print("Please enter valid email");
+                                            } else {
+                                              try {
+                                                final credential = await FirebaseAuth
+                                                    .instance
+                                                    .signInWithEmailAndPassword(
+                                                        email: _emailController
+                                                            .text,
+                                                        password:
+                                                            _passwdController
+                                                                .text);
+                                                if (credential.user != null &&
+                                                    context.mounted) {
+                                                  _emailController.clear();
+                                                  _passwdController.clear();
+                                                  Navigator.pushNamed(context,
+                                                      '/getStartedPage');
+                                                }
+                                              } on FirebaseAuthException catch (e) {
+                                                if (e.code ==
+                                                    'user-not-found') {
+                                                  print(
+                                                      "There is no user with that email");
+                                                } else if (e.code ==
+                                                    'wrong-password') {
+                                                  print(
+                                                      "Wrong password for user");
                                                 }
                                               }
-                                            },
-                                            child: Text('Login',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge))),
-                                  ),
-                                ],
-                              ),
+                                            }
+                                          },
+                                          child: Text('Login',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge))),
+                                ),
+                              ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,

@@ -79,60 +79,78 @@ class BackLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     return SafeArea(
       minimum: const EdgeInsets.only(top: constants.SAFEAREA_ALLINSETS),
       child: Scaffold(
         backgroundColor: kLoginBackground,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/gym_weight.png',
-                width: 234,
-                height: 217,
-              ),
-              const SizedBox(
-                height: 86,
-              ),
-              SizedBox(
-                width: 228,
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/loginPage');
-                  },
-                  child: Text(
-                    'Login',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
+        body: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Flexible(
+                      flex: 2,
+                      child: SizedBox(
+                        width: 0.65 * screenWidth,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Image.asset(
+                              'assets/gym_weight.png',
+                              height: 217,
+                            ),
+                            // const SizedBox(
+                            //   height: 86,
+                            // ),
+                            SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/loginPage');
+                                },
+                                child: Text(
+                                  'Login',
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 40,
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/registerPage');
+                                },
+                                style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(
+                                        color: kNutBackgroundBlue)),
+                                child: Text('Register',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(color: kNutBackgroundBlue)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: SignInFederation(
+                          dividerString: "or login with",
+                          btnWidthSize: 0.65 * screenWidth),
+                    )
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 40,
-              ),
-              SizedBox(
-                width: 228,
-                height: 40,
-                child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/registerPage');
-                  },
-                  style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: kNutBackgroundBlue)),
-                  child: Text('Register',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: kNutBackgroundBlue)),
-                ),
-              ),
-              const SizedBox(
-                height: 55,
-              ),
-              // const SignInFederation(), //! Add back later
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

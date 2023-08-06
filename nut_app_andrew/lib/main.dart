@@ -15,8 +15,8 @@ import 'color.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAuth.instance
-      .useAuthEmulator("localhost", 9099); //! For demoing only
+  // await FirebaseAuth.instance
+  //     .useAuthEmulator("localhost", 9099); //! For demoing only
   runApp(const MyApp());
 }
 
@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LandingPage(),
         '/registerPage': (context) => const RegisterPage(),
         '/loginPage': (context) => const LoginPage(),
-        '/getStartedPage': (context) => const GetStaredPageView()
+        '/getStartedPage': (context) => const GetStaredPageView(),
+        '/getStartedPage/page2': (context) => const GetStarted2()
       },
     );
   }
