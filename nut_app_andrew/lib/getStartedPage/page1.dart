@@ -25,7 +25,6 @@ class GetStarted1 extends StatelessWidget {
                     //   height: 56,
                     // ),
                     SizedBox(
-                        width: 261,
                         child: Text('Nut',
                             style: Theme.of(context).textTheme.titleLarge)),
                     Image.asset(
