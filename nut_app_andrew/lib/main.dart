@@ -47,7 +47,7 @@ final ThemeData _kNutTheme = _buildNutTheme();
 ThemeData _buildNutTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-      textTheme: _buildNutTextTheme(base.textTheme),
+      textTheme: _buildNutTextLightTheme(base.textTheme),
       scaffoldBackgroundColor: kLoginBackground,
       appBarTheme: base.appBarTheme.copyWith(
           elevation: 0.0,
@@ -81,17 +81,20 @@ ThemeData _buildNutTheme() {
           style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0))))));
+                      borderRadius: BorderRadius.circular(18.0))))),
+      dividerTheme: const DividerThemeData(color: Colors.black, thickness: 1));
 }
 
-TextTheme _buildNutTextTheme(TextTheme base) {
+TextTheme _buildNutTextLightTheme(TextTheme base) {
   return base.copyWith(
     titleLarge: GoogleFonts.russoOne(
         fontWeight: FontWeight.w400, fontSize: 144, color: kLogoText),
     bodyLarge: GoogleFonts.roboto(
         fontWeight: FontWeight.w600, fontSize: 30, color: kLogoText),
-    bodyMedium: GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 25),
-    bodySmall: GoogleFonts.roboto(fontWeight: FontWeight.w400, fontSize: 15),
+    bodyMedium: GoogleFonts.roboto(
+        fontWeight: FontWeight.w500, fontSize: 25, color: Colors.black),
+    bodySmall: GoogleFonts.roboto(
+        fontWeight: FontWeight.w400, fontSize: 15, color: Colors.black),
     labelSmall: GoogleFonts.roboto(
       color: Colors.black,
       fontWeight: FontWeight.w600,
