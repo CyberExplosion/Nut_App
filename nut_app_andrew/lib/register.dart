@@ -232,11 +232,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 40),
-                    child: Flexible(
-                      child: SignInFederation(
-                          dividerString: "or sign up with",
-                          btnWidthSize: 0.65 * screenWidth),
-                    ),
+                    child: SignInFederation(
+                        dividerString: "or sign up with",
+                        btnWidthSize: 0.65 * screenWidth),
                   )
                 ],
               ),

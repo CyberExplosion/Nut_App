@@ -1,21 +1,50 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../color.dart';
 
-Future<UserCredential> signInWithGoogle() async {
-  //create new provider
-  GoogleAuthProvider googleProvider = GoogleAuthProvider();
+// ! For web only
+// Future<UserCredential> signInWithGoogle() async {
+//   //create new provider
+//   GoogleAuthProvider googleProvider = GoogleAuthProvider();
+//
+//   //Once signed in, return credential
+//   return await FirebaseAuth.instance.signInWithPopup(googleProvider);
+// }
 
-  //Once signed in, return credential
-  return await FirebaseAuth.instance.signInWithPopup(googleProvider);
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  // Obtain the auth details
+  final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
+
+  // Create a new credential
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+
+  // Once signed in, return the userCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
 }
 
-Future<UserCredential> signInWithFacebook() async {
+Future<UserCredential?> signInWithFacebook() async {
   //new provider
-  FacebookAuthProvider facebookProvider = FacebookAuthProvider();
+  final LoginResult result = await FacebookAuth.instance.login();
 
-  ///return user credential
-  return await FirebaseAuth.instance.signInWithPopup(facebookProvider);
+  if (result.status == LoginStatus.success) {
+    // Create a credential from access token
+    final OAuthCredential credential =
+        FacebookAuthProvider.credential(result.accessToken!.token);
+
+    // Once signed in, returned the user credential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+  return null;
 }
 
 class SignInFederation extends StatefulWidget {
@@ -63,9 +92,18 @@ class _SignInFederationState extends State<SignInFederation> {
                   style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: kNutBackgroundBlue)),
                   onPressed: () async {
-                    signInWithGoogle().then((value) {
-                      print(value.user.toString());
-                    });
+                    try {
+                      UserCredential results = await signInWithGoogle();
+                      print("wat the fuk");
+                      print("The playa is: ${results.user.toString()}");
+                      // Succeed
+                      if (context.mounted) {
+                        Navigator.pushNamed(context, '/getStartedPage');
+                      }
+                    } on FirebaseAuthException catch (e) {
+                      print(
+                          "The problem is ${e.message} and code is ${e.code}");
+                    }
                   },
                   child: Stack(
                     children: [
@@ -94,7 +132,14 @@ class _SignInFederationState extends State<SignInFederation> {
                   style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: kNutBackgroundBlue)),
                   onPressed: () async {
-                    signInWithFacebook();
+                    UserCredential? result = await signInWithFacebook();
+                    if (result == null) {
+                      print("Log into facebook FAILED");
+                    } else {
+                      if (context.mounted) {
+                        Navigator.pushNamed(context, '/getStartedPage');
+                      }
+                    }
                   },
                   child: Stack(
                     children: [
