@@ -8,9 +8,9 @@ class CirclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // var paint = Paint()..color = const Color(kBubbleRegisterColor);
-    var paint = Paint()..color = kNutBackgroundBlue;
+    var paint = Paint()..color = kNutBackgroundBlue.withAlpha(100);
     Offset center = Offset(size.width / 2, size.height / 2);
-    canvas.drawCircle(center, 250, paint);
+    canvas.drawCircle(center, 200, paint);
   }
 
   @override
@@ -40,151 +40,207 @@ class _LoginPageState extends State<LoginPage> {
       ..onTap = () => Navigator.pushNamed(context, '/registerPage');
 
     return SafeArea(
-      minimum: const EdgeInsets.all(constants.SAFEAREA_ALLINSETS),
+      minimum: const EdgeInsets.only(top: constants.SAFEAREA_ALLINSETS),
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Positioned(
-                top: -75,
-                left: -70,
-                child: CustomPaint(
-                  size: const Size(485, 485),
-                  painter: CirclePainter(),
-                ),
-              ),
-              Positioned(
-                top: 29,
-                left: -39,
-                child: Image.asset(
-                  'assets/exercise_guy.png',
-                  width: 423,
-                  height: 388,
-                ),
-              ),
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+            leading: SizedBox(
+          child: IconButton(
+            iconSize: 40,
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              weight: 400,
+            ),
+            onPressed: () {
+              _emailController.clear();
+              _passwdController.clear();
+              Navigator.pop(context);
+            },
+          ),
+        )),
+        body: CustomScrollView(
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const SizedBox(
-                      height: 507,
-                    ),
                     SizedBox(
-                        height: 20,
-                        width: 0.62 * screenWidth,
-                        child: Text(
-                          'Email',
-                          style: Theme.of(context).textTheme.labelSmall,
-                          textAlign: TextAlign.start,
-                        )),
-                    SizedBox(
-                      width: 0.65 * screenWidth,
-                      height: 60,
-                      child: TextField(
-                        controller: _emailController,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          hintText: 'youremail@gmail.com',
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                        height: 20,
-                        width: 0.62 * screenWidth,
-                        child: Text(
-                          'Password',
-                          style: Theme.of(context).textTheme.labelSmall,
-                          textAlign: TextAlign.left,
-                        )),
-                    SizedBox(
-                      width: 0.65 * screenWidth,
-                      height: 60,
-                      child: TextField(
-                        controller: _passwdController,
-                        decoration: const InputDecoration(
-                            filled: true, hintText: 'Your Password'),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 0.65 * screenWidth,
-                      child: Row(
+                      height: 320,
+                      child: Stack(
                         children: [
-                          const Expanded(child: SizedBox()), //Fill the space
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'Forgot password',
-                              textAlign: TextAlign.left,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall!
-                                  .copyWith(
-                                    fontSize: 14.5,
-                                    color: Colors.black,
-                                  ),
+                          Positioned(
+                            top: -150,
+                            left: -70,
+                            child: CustomPaint(
+                              size: const Size(485, 485),
+                              painter: CirclePainter(),
+                            ),
+                          ),
+                          Positioned(
+                            top: 0,
+                            left: -39,
+                            child: Image.asset(
+                              'assets/exercise_guy.png',
+                              width: 400,
+                              height: 300,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    SizedBox(
+                    Flexible(
+                      child: SizedBox(
                         width: 0.65 * screenWidth,
-                        height: 40,
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              if (_emailController.text.isEmpty) {
-                                print("Please enter valid email");
-                              } else {
-                                try {
-                                  final credential = await FirebaseAuth.instance
-                                      .signInWithEmailAndPassword(
-                                          email: _emailController.text,
-                                          password: _passwdController.text);
-                                  if (credential.user != null &&
-                                      context.mounted) {
-                                    Navigator.pushNamed(
-                                        context, '/getStartedPage');
-                                  }
-                                } on FirebaseAuthException catch (e) {
-                                  if (e.code == 'user-not-found') {
-                                    print("There is no user with that email");
-                                  } else if (e.code == 'wrong-password') {
-                                    print("Wrong password for user");
-                                    //thisisabetch: password
-                                  }
-                                }
-                              }
-                            },
-                            child: Text('Login',
-                                style: Theme.of(context).textTheme.bodyLarge))),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Need an account? ',
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
-                          TextSpan(
-                              text: 'Register',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(color: kClickableText),
-                              recognizer: _registerLinkRecog)
-                        ],
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                    height: 20,
+                                    child: Text(
+                                      'Email',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall,
+                                      textAlign: TextAlign.start,
+                                    )),
+                                SizedBox(
+                                  height: 60,
+                                  child: TextField(
+                                    controller: _emailController,
+                                    decoration: const InputDecoration(
+                                      filled: true,
+                                      hintText: 'youremail@gmail.com',
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                    height: 20,
+                                    child: Text(
+                                      'Password',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall,
+                                      textAlign: TextAlign.left,
+                                    )),
+                                SizedBox(
+                                  height: 60,
+                                  child: TextField(
+                                    controller: _passwdController,
+                                    decoration: const InputDecoration(
+                                        filled: true,
+                                        hintText: 'Your Password'),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    TextButton(
+                                      onPressed:
+                                          () {}, // Fix forgot password problem
+                                      child: Text(
+                                        'Forgot password',
+                                        textAlign: TextAlign.right,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium!
+                                            .copyWith(
+                                                fontSize: 14.5,
+                                                color: Colors.black),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 23),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: SizedBox(
+                                        height: 40,
+                                        child: ElevatedButton(
+                                            onPressed: () async {
+                                              if (_emailController
+                                                  .text.isEmpty) {
+                                                print(
+                                                    "Please enter valid email");
+                                              } else {
+                                                try {
+                                                  final credential = await FirebaseAuth
+                                                      .instance
+                                                      .signInWithEmailAndPassword(
+                                                          email:
+                                                              _emailController
+                                                                  .text,
+                                                          password:
+                                                              _passwdController
+                                                                  .text);
+                                                  if (credential.user != null &&
+                                                      context.mounted) {
+                                                    Navigator.pushNamed(context,
+                                                        '/getStartedPage');
+                                                  }
+                                                } on FirebaseAuthException catch (e) {
+                                                  if (e.code ==
+                                                      'user-not-found') {
+                                                    print(
+                                                        "There is no user with that email");
+                                                  } else if (e.code ==
+                                                      'wrong-password') {
+                                                    print(
+                                                        "Wrong password for user");
+                                                    //thisisabetch: password
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            child: Text('Login',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge))),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'Need an account? ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall,
+                                      ),
+                                      TextSpan(
+                                          text: 'Register',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall!
+                                              .copyWith(color: kClickableText),
+                                          recognizer: _registerLinkRecog)
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
+                    ),
+                    // Flexible(child: Container()),
+                  ]),
+            )
+          ],
         ),
       ),
     );

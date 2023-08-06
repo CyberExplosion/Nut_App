@@ -15,8 +15,8 @@ import 'color.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await FirebaseAuth.instance
-  //     .useAuthEmulator("localhost", 9099); //! For demoing only
+  await FirebaseAuth.instance
+      .useAuthEmulator("localhost", 9099); //! For demoing only
   runApp(const MyApp());
 }
 
@@ -102,8 +102,8 @@ TextTheme _buildNutTextLightTheme(TextTheme base) {
     ),
     labelMedium: GoogleFonts.roboto(
         fontWeight: FontWeight.w600, fontSize: 30, color: kNutBackgroundBlue),
-    headlineSmall:
-        GoogleFonts.roboto(fontWeight: FontWeight.w700, fontSize: 14.5),
+    headlineSmall: GoogleFonts.roboto(
+        fontWeight: FontWeight.w700, fontSize: 14.5, color: Colors.black),
     headlineMedium: GoogleFonts.roboto(
         fontWeight: FontWeight.w700, fontSize: 20, color: kLogoText),
   );
